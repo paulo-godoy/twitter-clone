@@ -35,12 +35,12 @@
                         , t.tweet
                         , DATE_FORMAT(t.data, '%d/%m/%y %H:%i') as data
                         , u.nome 
-                      form tweets as t left join usuarios as u on (t.id_usuario = u.id) where t.id_usuario = id_usuario order by t.data desc";
+                      from tweets as t left join usuarios as u on (t.id_usuario = u.id) where t.id_usuario = :id_usuario order by t.data desc";
             $stmt = $this->db->prepare($query);
-            $stmt->bindValue(':id_usuario', $this->__set('id_usuario'));
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
             $stmt->execute();
 
-            return $stmt->fatchAll(\PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         }
     }
