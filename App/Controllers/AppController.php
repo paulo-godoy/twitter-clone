@@ -93,6 +93,24 @@ class AppController extends Action {
 		}
 
 		header('Location: /quem_seguir');
+    }
+    
+    public function excluir() {
+
+		$this->validaAutenticacao();
+
+		$excluir = isset($_GET['excluir']) ? $_GET['excluir'] : '';
+		$id_usuario = isset($_GET['id_usuario']) ? $_GET['id_usuario'] : '';
+
+		$usuario = Container::getModel('Usuario');
+		$usuario->__set('id', $_SESSION['id']);
+
+		if($acao == 'excluir') {
+			$usuario->excluirUsuario($id_usuario);
+
+		}
+
+		header('Location: /timeline');
 	}
 }
 ?>

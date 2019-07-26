@@ -126,6 +126,16 @@ class Usuario extends Model {
 		$stmt->execute();
 
 		return true;
+    }
+    
+    public function excluirUsuario($id_usuario) {
+		$query = "delete from tweets where id_usuario = :id_usuario";
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id_usuario', $this->__get('id'));
+		$stmt->bindValue(':id_usuario_seguindo', $id_usuario);
+		$stmt->execute();
+
+		return true;
 	}
 }
 
